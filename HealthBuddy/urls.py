@@ -1,4 +1,6 @@
 from django.urls import path
+from django.conf import settings
+from django.conf.urls.static import static
 
 from . import views
 
@@ -15,3 +17,6 @@ urlpatterns = [
     path("create_diary_item", views.create_diary_item, name="create_diary_item"),
     path("create_weight_goal", views.create_weight_goal, name="create_weight_goal"),
 ]
+
+urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
