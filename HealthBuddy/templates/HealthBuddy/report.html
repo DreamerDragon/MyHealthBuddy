@@ -1,0 +1,34 @@
+{% extends "HealthBuddy/layout.html" %}
+{% load static %}
+{% block body %}
+<main>
+    <section class="report">
+        {{ userReport |json_script:"userReport" }}
+        {{ request.user.id|json_script:"user_id" }}
+        <div class="health_report">
+            <h4> Hi {{username}}! This is your health report </h4>
+            <p> Your health diary progress: <span id='report-progress'> 0 <span></p>
+            <p> Your daily average Calorie intake:  <span id='report-daily-cal'> 0 <span> </p>
+            <p> Your dominant Calorie intake: <span id='report-dominant-cal'> 0 <span> </p>
+            <p> Your weight change since beginning: <span id='report-weight-change'> 0 <span> kg </p>
+        </div>
+        <div class="health_report">
+            <h4> Hi {{username}}! This is your health goal </h4>
+            <p> Your weight goal: <span id='report-weight-goal'> {{weightGoal}} kg </span> 
+                <input id='report-weight-goal-input' min="0" type="number">
+                <button id='report-weight-goal-btn'> Edit </button> </p>
+            <p> Your current weight: <span id='report-current-weight'> 0 </span> <span id='report-weight-success' style='font-size:1.3rem; color: #41B3A3' class="bi bi-check-lg"></span> </p>
+        </div>
+        <div class="chart_container">
+            <canvas id="lineWeightChart"></canvas>
+            <canvas id="lineCalChart"></canvas>
+            <canvas id="pieChart"></canvas>
+        </div>
+    </section>
+</main>
+
+<script src="{% static 'HealthBuddy/scripts/charts.js' %}">
+</script>
+
+
+{% endblock %}

@@ -1,0 +1,82 @@
+{% extends "HealthBuddy/layout.html" %}
+{% load static %}
+{% block body %}
+<main>
+    <section class="menu">
+        <form class="menu_search" action="{% url 'menu' %}" method="post">
+            {% csrf_token %}
+            {% if food_search_name %}
+            <input class="menu_search_input" type="input" name="food_search_name" value={{food_search_name}} placeholder="Search for food">
+            {% else %}
+            <input class="menu_search_input" type="input" name="food_search_name" value='' placeholder="Search for food">
+            {% endif %}
+            <select class="menu_search_dropdown" name="food_search_type" id="food_search_type">
+                {% for key, value in food_search_dic.items %} 
+                    {% if value %}
+                    <option selected value={{key}}>{{key}}</option>
+                    {% else %}
+                    <option value={{key}}>{{key}}</option>
+                    {% endif %}
+                {% endfor %}
+              </select>
+            <div class="menu_search_btn" type="submit">
+                <i class="bi bi-search"></i>
+            </div>
+        </form>
+
+        <form class="menu_create" action="{% url 'create_menu_item' %}" method="post">
+            {% csrf_token %}
+            <div class="menu_create_name">
+                <label for="food_create_name">Food name:</label>
+                <input maxlength="20" id="foodname" name="food_create_name" type="text" />
+            </div>
+            <div class="menu_create_cal">
+                <label for="food_create_calorie">Calorie (Cal/100g):</label>
+                <input id="calorie" name="food_create_calorie" type="text" />
+            </div>
+            <div class="menu_create_category">
+            <label for="food_create_type">Category:</label>
+            <select class="menu_create_dropdown" name="food_create_type" id="foodtype">
+                <option value="Fruit">Fruit</option>
+                <option value="Vegetable">Vegetable</option>
+                <option value="Meat">Meat</option>
+                <option value="Dairy">Dairy</option>
+                <option value="Grain">Grain</option>
+                <option value="Others">Others</option>
+              </select>
+            </div>
+            <div class="menu_create_btn">
+                {% if user.is_authenticated %}
+                <input type="submit" value="Create">
+                {% else %}
+                <input type="submit" value="Create" style='background:#C1C8E4 ' disabled>
+                {% endif %}
+            </div>
+        </form>
+        
+        <div class="menu_list">
+            <div class="menu-pagination">
+                {% if foodList.has_previous %}
+                <div><a class="menu-page-item" href="?page={{foodList.previous_page_number}}">Previous</a></div>
+                {% endif %} {% if foodList.has_next %}
+                <div><a class="menu-page-item" href="?page={{foodList.next_page_number}}">Next</a></div>
+                {% endif %}
+            </div>
+            {% for food in foodList %}
+            <div class="menu_item" id='menu_item-{{food.id}}'>
+                <span> {{food.foodname}} </span>
+                <span> {{food.foodtype}} </span>
+                <span> {{food.foodCal}} </span>
+                {% if user.is_authenticated and user.id == food.creator.id %}
+                   <i id='delete-btn-{{food.id}}' onClick="removeItem({{food.id}})" class="bi bi-x-square-fill"></i>
+                {% endif %}
+            </div>
+            {% endfor %}
+        </div>
+    </section>
+</main>
+
+<script src="{% static 'HealthBuddy/scripts/menu.js' %}">
+</script>
+
+{% endblock %}

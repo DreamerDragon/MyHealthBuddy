@@ -1,0 +1,92 @@
+{% extends "HealthBuddy/layout.html" %}
+{% load static %}
+{% block body %}
+<main>
+    <section class="diary_wrapper">
+      {{ userDiaries |json_script:"userDiaries" }}
+      {{ request.user.id|json_script:"user_id" }}
+        <div class="calender">
+            <header class="calender__header">
+              <span class="current-date"></span>
+              <div class="icons">
+                <h5 id = 'prev' class="bi bi-arrow-left-square" style='margin-right: 5px;'></h5>
+                <h5 id = 'next' class="bi bi-arrow-right-square"></h5>
+              </div>
+            </header>
+            <div class="calender__body">
+              <ul class="weeks">
+                <li>Sun</li>
+                <li>Mon</li>
+                <li>Tue</li>
+                <li>Wed</li>
+                <li>Thu</li>
+                <li>Fri</li>
+                <li>Sat</li>
+              </ul>
+              <ul class="days"></ul>
+            </div>
+          </div>
+          <form class="diary" action="{% url 'create_diary_item' %}" id='diary-form' method="post">
+            {% csrf_token %}
+            <header class="diary__header">
+              <p class="diary__header-date"></p>
+              <input type="hidden" name="year">
+              <input type="hidden" name="month">
+              <input type="hidden" name="date">
+              <p class="diary__header-button"> Edit </span>
+            </header>
+            <div class="diary__body">
+            <div class="diary__body-summary">
+              <span> Body Weight: 
+                <span id="diary-display" name="weight"> 0 </span>
+                <input id="diary-input" min="0" type="number" name="weight">
+                kg;
+              </span>
+              <span> Total Calorie: <span id='total-calorie'> 0 </span> Cal;
+              </span>
+            </div>
+            <div class="diary__body-portions">
+              <span> Fruits: 
+                <span id="diary-display" name="fruits"> 0 </span>
+                <input id="diary-input" type="number" name="fruits">
+                Cal; 
+              </span>
+              <span> Vegetables:
+                <span id="diary-display" name="vegs"> 0 </span>
+                <input id="diary-input" min="0" type="number" name="vegs">
+                Cal;
+              </span>
+              <span> Meat: 
+                <span id="diary-display" name="meat"> 0 </span>
+                <input id="diary-input" min="0" type="number" name="meat">
+                Cal; 
+              </span>
+              <span> Dairy: 
+                <span id="diary-display"  name="dairy"> 0 </span>
+                <input id="diary-input" min="0" type="number" name="dairy">
+                Cal; 
+              </span>
+              <span> Grain: 
+                <span id="diary-display" name="grain"> 0 </span>
+                <input id="diary-input" min="0" type="number" name="grain">
+                Cal; 
+              </span>
+              <span> Others: 
+                <span id="diary-display" name="others"> 0 </span>
+                <input id="diary-input" min="0" type="number" name="others">
+                Cal; 
+              </span>
+            </div>
+            <span class="diary__body-diary">
+              Notes:
+              <span id="diary-display" name="notes"> None  </span>
+            </span>
+            <input id="diary-input" type="text" name="notes">
+          </div>
+        </form>
+    </section>
+</main>
+
+<script src="{% static 'HealthBuddy/scripts/calender.js' %}">
+</script>
+{% endblock %}

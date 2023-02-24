@@ -1,0 +1,35 @@
+{% extends "HealthBuddy/layout.html" %}
+{% block body %}
+
+<main>
+    <section class="home">
+        <h2> Hi {% if user.is_authenticated %}
+            {{user.username}}
+           {% endif %}! 
+            Welcome to the world of health buddies! </h2>
+        <div class='box_wrapper'>
+            <div class='box'>
+                <i class="bi bi-calendar-check"></i> Health Diary
+            </div>
+            <div class='box'>
+                <i class="bi bi-clipboard-check"></i> Health Report
+            </div>
+            <div class='box'>
+                <i class="bi bi-menu-button-wide"></i> Health Menu
+            </div>
+        </div>
+        <div class="explore_link" >
+            {% if user.is_authenticated %}
+            <a href="{% url 'diary' %}">
+                Explore now => 
+            </a>
+            {% else %}
+            <a href="{% url 'login' %}">
+                Login to explore => 
+            </a>
+           {% endif %}
+        </div>
+    </section>
+</main>
+
+{% endblock %}
