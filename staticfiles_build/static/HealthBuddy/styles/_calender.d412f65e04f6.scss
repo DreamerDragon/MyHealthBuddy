@@ -1,0 +1,138 @@
+.calender {
+    z-index: 0;
+    width: 450px;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
+    &__header {
+        background-color: $purple-color;
+        position: relative;
+        width: inherit;
+        height: 20px;
+        display: flex;
+        padding: 25px 30px 10px;
+        align-items: center;
+        justify-content: space-between;
+        .icons {
+            display: flex;
+            span {
+                height: 38px;
+                width: 38px;
+                margin: 0 1px;
+                cursor: pointer;
+                color: #878787;
+                user-select: none;
+                border-radius: 50%;
+                &:last-child {
+                    margin-right: -10px;
+                }
+                &:hover {
+                    background: #f2f2f2;
+                }
+            }
+        }
+        .current-date {
+            font-size: 1.45rem;
+            font-weight: 500;
+        }
+    }
+    &__body {
+        padding: 20px;
+        ul {
+            display: flex;
+            flex-wrap: wrap;
+            list-style: none;
+            text-align: center;
+        }
+        li {
+            color: #333;
+            width: calc(100% / 7);
+            font-size: 1.07rem;
+        }
+        .weeks li {
+            font-weight: 500;
+            cursor: default;
+        }
+        .days li {
+            z-index: 1;
+            cursor: pointer;
+            position: relative;
+            margin-top: 30px;
+            &.active {
+                color: #fff;
+                &::before {
+                    background: $purple-color;
+                }
+            }
+            &.inactive {
+                color: #aaa;
+                 :hover::before {
+                    background: #f2f2f2;
+                }
+            }
+            &::before {
+                position: absolute;
+                content: "";
+                left: 50%;
+                top: 50%;
+                height: 40px;
+                width: 40px;
+                z-index: -1;
+                border-radius: 50%;
+                transform: translate(-50%, -50%);
+            }
+        }
+    }
+}
+
+.diary {
+    z-index: 0;
+    margin-top: 20px;
+    min-height: 100px;
+    width: 450px;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
+    input[type=text] {
+        width: 300px;
+    }
+    input[type=number] {
+        width: 50px;
+    }
+    &__header {
+        background-color: $purple-color;
+        position: relative;
+        width: inherit;
+        height: 20px;
+        display: flex;
+        padding: 25px 30px 10px;
+        align-items: center;
+        justify-content: space-between;
+        &-button {
+            cursor: pointer;
+        }
+    }
+    &__body {
+        padding: 10px 30px;
+        display: flex;
+        flex-direction: column;
+        &-summary {
+            font-size: 1rem;
+            color: black
+        }
+        &-portions {
+            font-size: 0.9rem;
+            display: flex;
+            flex-flow: row wrap;
+            margin: 10px 0;
+            color: rgb(84, 84, 84);
+            span {
+                margin: 5px 5px 0 0;
+            }
+        }
+        &-diary {
+            color: rgb(133, 133, 133);
+            margin: 5px 0;
+        }
+    }
+}

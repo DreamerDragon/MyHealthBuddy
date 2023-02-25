@@ -1,0 +1,163 @@
+@import './responsive';
+@import './variables';
+@import './components';
+.diary_wrapper {
+    height: 100%;
+    overflow: scroll;
+    display: flex;
+    padding-top: 20vh;
+    padding-bottom: 100px;
+    flex-direction: column;
+    align-items: center;
+    @include media(mobile) {
+        .calender,
+        .diary {
+            width: 350px;
+            &__body {
+                padding: 20px 30px;
+            }
+        }
+    }
+    @include media(tablet) {
+        .calender,
+        .diary {
+            width: 500px;
+            &__body {
+                padding: 25px 30px;
+            }
+        }
+    }
+    @include media(desktop) {
+        .calender,
+        .diary {
+            width: 600px;
+            &__body {
+                padding: 35px 30px;
+            }
+        }
+    }
+}
+
+.calender {
+    z-index: 0;
+    width: 450px;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
+    &__header {
+        background-color: $purple-color;
+        position: relative;
+        width: inherit;
+        height: 50px;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        .icons {
+            cursor: pointer;
+            display: flex;
+            margin-right: 10px;
+            height: 100%;
+        }
+        .current-date {
+            font-size: 1.5rem;
+            margin-left: 20px;
+            font-weight: 500;
+        }
+    }
+    &__body {
+        padding: 20px;
+        ul {
+            display: flex;
+            flex-wrap: wrap;
+            list-style: none;
+            text-align: center;
+        }
+        li {
+            color: #333;
+            width: calc(100% / 7);
+            font-size: 1.07rem;
+        }
+        .weeks li {
+            font-weight: 500;
+            cursor: default;
+        }
+        .days li {
+            z-index: 1;
+            cursor: pointer;
+            position: relative;
+            margin-top: 30px;
+            &.active {
+                color: $blue3;
+            }
+            &.inactive {
+                color: #aaa;
+                 :hover::before {
+                    background: #f2f2f2;
+                }
+            }
+            &::before {
+                position: absolute;
+                content: "";
+                left: 50%;
+                top: 50%;
+                height: 40px;
+                width: 40px;
+                z-index: -1;
+                border-radius: 50%;
+                transform: translate(-50%, -50%);
+            }
+        }
+    }
+}
+
+.diary {
+    z-index: 0;
+    margin-top: 20px;
+    width: 450px;
+    height: fit-content;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
+    input[type=text] {
+        width: 300px;
+    }
+    input[type=number] {
+        width: 50px;
+    }
+    &__header {
+        background-color: $purple-color;
+        position: relative;
+        width: inherit;
+        height: 20px;
+        display: flex;
+        padding: 25px 30px 10px;
+        align-items: center;
+        justify-content: space-between;
+        &-button {
+            cursor: pointer;
+        }
+    }
+    &__body {
+        display: flex;
+        flex-direction: column;
+        &-summary {
+            font-size: 1rem;
+            color: black
+        }
+        &-portions {
+            font-size: 0.9rem;
+            display: flex;
+            flex-flow: row wrap;
+            margin: 10px 0;
+            color: rgb(84, 84, 84);
+            span {
+                margin: 5px 5px 0 0;
+            }
+        }
+        &-diary {
+            color: rgb(133, 133, 133);
+            margin: 5px 0;
+        }
+    }
+}
