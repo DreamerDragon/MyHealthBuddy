@@ -1,0 +1,237 @@
+@import './responsive';
+@import './variables';
+@import './components';
+.menu {
+    min-width: 350px;
+    position: relative;
+    &-pagination {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        position: absolute;
+        top: 0px;
+    }
+    &-page-item {
+        @include button($blue3, white, $size-s);
+        display: flex;
+        justify-content: center;
+        cursor: pointer;
+        margin: 5px;
+        a {
+            color: white;
+        }
+        &:hover {
+            color: $blue1;
+            text-decoration: none;
+        }
+    }
+    @include media(mobile) {
+        padding: 0 4%;
+        &_search,
+        &_create,
+        &_list {
+            width: 92%;
+        }
+        &_list {
+            font-size: 0.9rem;
+            grid-auto-rows: 30px;
+        }
+        &_item {
+            height: 40px;
+            padding: 5px 30px;
+        }
+    }
+    @include media(tablet, desktop) {
+        padding: 0 20%;
+        &_search,
+        &_create,
+        &_list {
+            width: 60%;
+        }
+        &_list {
+            font-size: 1rem;
+            grid-auto-rows: 50px;
+        }
+        &_item {
+            height: 50px;
+            padding: 2px 30px;
+        }
+    }
+    height: 100%;
+    width: 100%;
+    position: relative;
+    &_search {
+        position: absolute;
+        height: 50px;
+        top: 120px;
+        background-color: white;
+        border-radius: 20px;
+        display: flex;
+        overflow: hidden;
+        input {
+            border: none;
+            &:focus {
+                border: none;
+                outline: 0 none;
+                box-shadow: none;
+            }
+        }
+        &_input {
+            width: calc(75% - 20px);
+            margin-left: 20px;
+        }
+        &_dropdown {
+            width: 15%;
+            border: none;
+            cursor: pointer;
+        }
+        &_btn {
+            background-color: $blue1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 10%;
+            cursor: pointer;
+        }
+    }
+    &_create {
+        position: absolute;
+        min-height: 80px;
+        top: 200px;
+        display: flex;
+        overflow: hidden;
+        background-color: transparent;
+        align-items: center;
+        justify-content: space-between;
+        color: $blue1;
+        &_name,
+        &_cal {
+            display: flex;
+            flex-direction: column;
+            input {
+                height: 30px;
+                border: $blue1 solid 1px;
+                border-radius: 10px;
+            }
+        }
+        &_category {
+            display: flex;
+            flex-direction: column;
+            select {
+                height: 30px;
+                width: 160px;
+                border-radius: 10px;
+                border: $blue1 solid 1px;
+                cursor: pointer;
+            }
+        }
+        &_btn {
+            position: relative;
+            height: 50px;
+            input {
+                position: absolute;
+                top: 20px;
+                @include button($blue1, white, $size-s);
+                width: 100%;
+            }
+        }
+        @include media(mobile) {
+            &_name,
+            &_cal,
+            &_category {
+                width: 30%;
+                font-size: 0.6rem;
+                input {
+                    width: 80%;
+                }
+                select {
+                    width: 80%;
+                }
+            }
+            &_btn {
+                font-size: 0.6rem;
+                width: 10%;
+                margin-bottom: 5px;
+            }
+        }
+        @include media(tablet) {
+            &_name,
+            &_cal,
+            &_category {
+                width: 150px;
+                font-size: 0.8rem;
+                input {
+                    width: 100px;
+                }
+                select {
+                    width: 100px;
+                }
+            }
+            &_btn {
+                font-size: 0.8rem;
+                width: 100px;
+            }
+        }
+        @include media(desktop) {
+            &_name,
+            &_cal,
+            &_category {
+                width: 200px;
+                font-size: 1rem;
+                input {
+                    width: 150px;
+                }
+                select {
+                    width: 150px;
+                }
+            }
+            &_btn {
+                font-size: 1rem;
+                width: 150px;
+            }
+        }
+    }
+    &_list {
+        position: absolute;
+        height: calc(100vh - 300px);
+        top: 300px;
+        padding-top: 50px;
+        padding-bottom: 50px;
+        display: grid;
+        @include media(mobile, tablet) {
+            grid-template-columns: 1fr;
+        }
+        @include media(desktop) {
+            grid-template-columns: repeat(2, 1fr);
+        }
+        column-gap: 10px;
+        row-gap: 1rem;
+        overflow: scroll;
+    }
+    &_item {
+        background-color: #fffefe;
+        width: 100%;
+        border-radius: 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        color: black;
+        position: relative;
+        span:first-child {
+            width: 40%;
+        }
+        span:nth-child(2) {
+            width: 40%;
+        }
+        span:nth-child(3) {
+            width: 20%;
+        }
+        i {
+            position: absolute;
+            right: 0px;
+            top: 0px;
+            cursor: pointer;
+            color: $blue3;
+        }
+    }
+}
